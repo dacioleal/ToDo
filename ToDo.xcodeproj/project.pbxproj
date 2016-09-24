@@ -20,6 +20,10 @@
 		F3D0D54C1D9688E200BDE714 /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0D54A1D9688E200BDE714 /* ToDoItem.swift */; };
 		F3D0D54D1D9688E200BDE714 /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0D54A1D9688E200BDE714 /* ToDoItem.swift */; };
 		F3D0D5531D968C1300BDE714 /* ToDoItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0D5521D968C1300BDE714 /* ToDoItemTests.swift */; };
+		F3D0D5551D969C7700BDE714 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0D5541D969C7700BDE714 /* Location.swift */; };
+		F3D0D5561D969C7700BDE714 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0D5541D969C7700BDE714 /* Location.swift */; };
+		F3D0D5571D969C7700BDE714 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0D5541D969C7700BDE714 /* Location.swift */; };
+		F3D0D5591D96A11300BDE714 /* LocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0D5581D96A11300BDE714 /* LocationTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +59,8 @@
 		F384DB8B1D968168008E5ECF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3D0D54A1D9688E200BDE714 /* ToDoItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToDoItem.swift; path = Model/ToDoItem.swift; sourceTree = "<group>"; };
 		F3D0D5521D968C1300BDE714 /* ToDoItemTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoItemTests.swift; sourceTree = "<group>"; };
+		F3D0D5541D969C7700BDE714 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Location.swift; path = Model/Location.swift; sourceTree = "<group>"; };
+		F3D0D5581D96A11300BDE714 /* LocationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +128,7 @@
 				F384DB7E1D968168008E5ECF /* ToDoTests.swift */,
 				F384DB801D968168008E5ECF /* Info.plist */,
 				F3D0D5521D968C1300BDE714 /* ToDoItemTests.swift */,
+				F3D0D5581D96A11300BDE714 /* LocationTests.swift */,
 			);
 			path = ToDoTests;
 			sourceTree = "<group>";
@@ -139,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				F3D0D54A1D9688E200BDE714 /* ToDoItem.swift */,
+				F3D0D5541D969C7700BDE714 /* Location.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -282,6 +290,7 @@
 			files = (
 				F384DB6C1D968168008E5ECF /* ViewController.swift in Sources */,
 				F384DB6A1D968168008E5ECF /* AppDelegate.swift in Sources */,
+				F3D0D5551D969C7700BDE714 /* Location.swift in Sources */,
 				F3D0D54B1D9688E200BDE714 /* ToDoItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,7 +301,9 @@
 			files = (
 				F384DB971D968264008E5ECF /* ViewController.swift in Sources */,
 				F3D0D54C1D9688E200BDE714 /* ToDoItem.swift in Sources */,
+				F3D0D5561D969C7700BDE714 /* Location.swift in Sources */,
 				F3D0D5531D968C1300BDE714 /* ToDoItemTests.swift in Sources */,
+				F3D0D5591D96A11300BDE714 /* LocationTests.swift in Sources */,
 				F384DB7F1D968168008E5ECF /* ToDoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,6 +314,7 @@
 			files = (
 				F384DB981D968265008E5ECF /* ViewController.swift in Sources */,
 				F384DB8A1D968168008E5ECF /* ToDoUITests.swift in Sources */,
+				F3D0D5571D969C7700BDE714 /* Location.swift in Sources */,
 				F3D0D54D1D9688E200BDE714 /* ToDoItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -21,10 +21,38 @@ class ToDoItemTests: XCTestCase {
         super.tearDown()
     }
     
-        
     func testInit_ShouldTakeTitle() {
         let item = ToDoItem(title: "Test title")
         XCTAssertNotNil(item, "item should not be nil")
     }
     
+    
+    func testInit_ShouldTakeTitleAndDescription() {
+        let item = ToDoItem(title: "Test title", itemDescription: "Test description")
+        XCTAssertNotNil(item, "item should not be nil")
+    }
+    
+    func testInit_ShouldSetTitle() {
+        let item = ToDoItem(title: "Test title")
+        XCTAssertEqual(item.title, "Test title", "initializer should set the item title")
+    }
+    
+    func testInit_ShouldSetTitleAndDescription() {
+        let item = ToDoItem(title: "Test title", itemDescription: "Test description")
+        XCTAssertEqual(item.title, "Test title", "initializer should set the item title")
+        XCTAssertEqual(item.itemDescription, "Test description", "initializer should set the item description")
+    }
+    
+    func testInit_ShouldSetTitleAndDescriptionAndTimestamp() {
+        let item = ToDoItem(title: "Test title", itemDescription: "Test description", timestamp: 0.0)
+        XCTAssertEqual(item.title, "Test title", "initializer should set the item title")
+        XCTAssertEqual(item.itemDescription, "Test description", "initializer should set the item description")
+        XCTAssertEqual(item.timestamp, 0.0, "initializer should set the item timestamp")
+    }
+    
+    func testInit_ShouldSetTitleAndDescriptionAndTimestampAndLocation() {
+        let location = Location(name: "Test name")
+        let item = ToDoItem(title: "Test title", itemDescription: "Test description", timestamp: 0.0, location: location)
+        XCTAssertEqual(item.location?.name, location.name, "Initializer should set the location")
+    }
 }
