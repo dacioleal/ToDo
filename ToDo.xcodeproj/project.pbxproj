@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F37C4E251D96E2FC0080572C /* ItemManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37C4E241D96E2FC0080572C /* ItemManagerTests.swift */; };
+		F37C4E271D96E3FE0080572C /* ItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37C4E261D96E3FE0080572C /* ItemManager.swift */; };
+		F37C4E281D96E3FE0080572C /* ItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37C4E261D96E3FE0080572C /* ItemManager.swift */; };
+		F37C4E291D96E3FE0080572C /* ItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37C4E261D96E3FE0080572C /* ItemManager.swift */; };
 		F384DB6A1D968168008E5ECF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F384DB691D968168008E5ECF /* AppDelegate.swift */; };
 		F384DB6C1D968168008E5ECF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F384DB6B1D968168008E5ECF /* ViewController.swift */; };
 		F384DB6F1D968168008E5ECF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F384DB6D1D968168008E5ECF /* Main.storyboard */; };
@@ -44,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F37C4E241D96E2FC0080572C /* ItemManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemManagerTests.swift; sourceTree = "<group>"; };
+		F37C4E261D96E3FE0080572C /* ItemManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItemManager.swift; path = Model/ItemManager.swift; sourceTree = "<group>"; };
 		F384DB661D968168008E5ECF /* ToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F384DB691D968168008E5ECF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F384DB6B1D968168008E5ECF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -125,10 +131,11 @@
 		F384DB7D1D968168008E5ECF /* ToDoTests */ = {
 			isa = PBXGroup;
 			children = (
-				F384DB7E1D968168008E5ECF /* ToDoTests.swift */,
 				F384DB801D968168008E5ECF /* Info.plist */,
+				F384DB7E1D968168008E5ECF /* ToDoTests.swift */,
 				F3D0D5521D968C1300BDE714 /* ToDoItemTests.swift */,
 				F3D0D5581D96A11300BDE714 /* LocationTests.swift */,
+				F37C4E241D96E2FC0080572C /* ItemManagerTests.swift */,
 			);
 			path = ToDoTests;
 			sourceTree = "<group>";
@@ -136,8 +143,8 @@
 		F384DB881D968168008E5ECF /* ToDoUITests */ = {
 			isa = PBXGroup;
 			children = (
-				F384DB891D968168008E5ECF /* ToDoUITests.swift */,
 				F384DB8B1D968168008E5ECF /* Info.plist */,
+				F384DB891D968168008E5ECF /* ToDoUITests.swift */,
 			);
 			path = ToDoUITests;
 			sourceTree = "<group>";
@@ -147,6 +154,7 @@
 			children = (
 				F3D0D54A1D9688E200BDE714 /* ToDoItem.swift */,
 				F3D0D5541D969C7700BDE714 /* Location.swift */,
+				F37C4E261D96E3FE0080572C /* ItemManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -289,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F384DB6C1D968168008E5ECF /* ViewController.swift in Sources */,
+				F37C4E271D96E3FE0080572C /* ItemManager.swift in Sources */,
 				F384DB6A1D968168008E5ECF /* AppDelegate.swift in Sources */,
 				F3D0D5551D969C7700BDE714 /* Location.swift in Sources */,
 				F3D0D54B1D9688E200BDE714 /* ToDoItem.swift in Sources */,
@@ -305,6 +314,8 @@
 				F3D0D5531D968C1300BDE714 /* ToDoItemTests.swift in Sources */,
 				F3D0D5591D96A11300BDE714 /* LocationTests.swift in Sources */,
 				F384DB7F1D968168008E5ECF /* ToDoTests.swift in Sources */,
+				F37C4E281D96E3FE0080572C /* ItemManager.swift in Sources */,
+				F37C4E251D96E2FC0080572C /* ItemManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F384DB981D968265008E5ECF /* ViewController.swift in Sources */,
+				F37C4E291D96E3FE0080572C /* ItemManager.swift in Sources */,
 				F384DB8A1D968168008E5ECF /* ToDoUITests.swift in Sources */,
 				F3D0D5571D969C7700BDE714 /* Location.swift in Sources */,
 				F3D0D54D1D9688E200BDE714 /* ToDoItem.swift in Sources */,
