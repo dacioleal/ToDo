@@ -10,26 +10,38 @@ import Foundation
 
 class ItemManager {
     
-    var toDoCount = 0
-    var doneCount = 0
+    var toDoCount: Int {
+        return toDoItems.count
+    }
+    var doneCount: Int {
+        return doneItems.count
+    }
     
     private var toDoItems = [ToDoItem]()
+    private var doneItems = [ToDoItem]()
     
     func addItem(_ item: ToDoItem) {
-        
-        toDoCount += 1
-        toDoItems.append(item)
+        if !toDoItems.contains(item) {
+            toDoItems.append(item)
+        }
     }
     
     func itemAtIndex(_ index: Int) -> ToDoItem {
-        
         return toDoItems[index]
     }
     
     func checkItemAtIndex(_ index: Int) {
-        
-        toDoCount += -1
-        doneCount += 1
+        let doneItem = toDoItems.remove(at: index)
+        doneItems.append(doneItem)
+    }
+    
+    func doneItemAtIndex(_ index: Int) -> ToDoItem {
+        return doneItems[index]
+    }
+    
+    func removeAllItems() {
+        toDoItems.removeAll()
+        doneItems.removeAll()
     }
     
 }

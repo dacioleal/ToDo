@@ -56,4 +56,64 @@ class ItemManagerTests: XCTestCase {
         XCTAssertEqual(sut.doneCount, 1, "doneCount should be 1")
     }
     
+    func testCheckingItem_RemovesItFromTheToDoItemList() {
+        
+        let firstItem = ToDoItem(title: "First")
+        let secondItem = ToDoItem(title: "Second")
+        
+        sut.addItem(firstItem)
+        sut.addItem(secondItem)
+        
+        sut.checkItemAtIndex(0)
+        XCTAssertEqual(sut.itemAtIndex(0).title, secondItem.title, "if removed first item, title should be previously second item title")
+    }
+    
+    func testDoneItemAtIndex_ShouldReturnPreviouslyCheckedItem() {
+        
+        let item = ToDoItem(title: "Item")
+        sut.addItem(item)
+        sut.checkItemAtIndex(0)
+        
+        let returnedItem = sut.doneItemAtIndex(0)
+        XCTAssertEqual(returnedItem.title, item.title, "should be the same item")
+    }
+    
+    func testRemoveAllItems_ShouldResultInCountsBeZero() {
+        sut.addItem(ToDoItem(title: "First"))
+        sut.addItem(ToDoItem(title: "Second"))
+        sut.checkItemAtIndex(0)
+        XCTAssertEqual(sut.toDoCount, 1, "toDoCount should be 1")
+        XCTAssertEqual(sut.doneCount, 1, "doneCount should be 1")
+        
+        sut.removeAllItems()
+        XCTAssertEqual(sut.toDoCount, 0, "toDoCount should be 0")
+        XCTAssertEqual(sut.doneCount, 0, "doneCount should be 0")
+    }
+    
+    func testAddingTheSameItem_DoesNotIncreaseCount() {
+        sut.addItem(ToDoItem(title: "First"))
+        sut.addItem(ToDoItem(title: "First"))
+        XCTAssertEqual(sut.toDoCount, 1, "toDoCount should be 1")
+    }
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
