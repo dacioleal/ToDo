@@ -11,9 +11,14 @@ import XCTest
 
 class ItemListViewControllerTests: XCTestCase {
     
+    var sut: ItemListViewController!
+    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        sut = storyBoard.instantiateViewController(withIdentifier: "ItemListViewController") as! ItemListViewController
+        _ = sut.view
     }
     
     override func tearDown() {
@@ -22,12 +27,11 @@ class ItemListViewControllerTests: XCTestCase {
     }
     
     func test_TableViewIsNotNilAfterViewDidLoad() {
-        /*
-        let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let sut = storyBoard.instantiateViewController(withIdentifier: "ItemListViewController") as! ItemListViewController
-        _ = sut.view
         XCTAssertNotNil(sut.tableView, "tableview should not be nil")
- */
-        //Comment
+    }
+    
+    func testViewDidLoad_ShouldSetTableViewDataSource() {
+        XCTAssertNotNil(sut.tableView.dataSource)
+        XCTAssertTrue(sut.tableView.dataSource is ToDo.ItemListDataProvider)
     }
 }
