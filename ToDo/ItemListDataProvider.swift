@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ItemListDataProvider: NSObject, UITableViewDataSource {
+class ItemListDataProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 0
