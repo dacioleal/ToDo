@@ -53,4 +53,47 @@ class ItemListDataProviderTests: XCTestCase {
         XCTAssertEqual(tableView.numberOfRows(inSection: 1), 2)
     }
     
+    func testCellForRow_ReturnsItemCell() {
+        sut.itemManager?.addItem(ToDoItem(title: "First"))
+        tableView.reloadData()
+        
+        let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0))
+        XCTAssertTrue(cell is ItemCell)
+    }
+    
 }
+
+extension ItemListDataProviderTests {
+
+    class MockTableView: UITableView {
+        
+        var cellGotDequeued = false
+        
+        override func dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> UITableViewCell {
+            cellGotDequeued = true
+            return super.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
