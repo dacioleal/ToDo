@@ -52,7 +52,6 @@ class ItemListDataProviderTests: XCTestCase {
         sut.itemManager!.addItem(ToDoItem(title: "Second"))
         sut.itemManager!.checkItemAtIndex(0)
         XCTAssertEqual(tableView.numberOfRows(inSection: 1), 1)
-        
         sut.itemManager!.checkItemAtIndex(0)
         tableView.reloadData()
         XCTAssertEqual(tableView.numberOfRows(inSection: 1), 2)
@@ -76,6 +75,18 @@ class ItemListDataProviderTests: XCTestCase {
         XCTAssertTrue(mockTableView.cellGotDequeued)
     }
     
+    func testConfigCell_GetsCalledInCellForRow() {
+        let mockTableView = MockTableView()
+        mockTableView.dataSource = sut
+        mockTableView.register(MockItemCell.classForKeyedArchiver(), forCellReuseIdentifier: "ItemCell")
+        let toDoItem = ToDoItem(title: "First")
+        sut.itemManager?.addItem(toDoItem)
+        mockTableView.reloadData()
+        let cell = mockTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! MockItemCell
+        XCTAssertEqual(cell.toDoItem, toDoItem)
+        
+    }
+    
 }
 
 extension ItemListDataProviderTests {
@@ -88,13 +99,24 @@ extension ItemListDataProviderTests {
             cellGotDequeued = true
             return super.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
         }
+    }
+    
+    class MockItemCell: ItemCell {
         
-        override func cellForRow(at indexPath: IndexPath) -> UITableViewCell? {
-            let cell = dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath)
-            return cell
+        var toDoItem: ToDoItem?
+        
+        override func configCell(WithItem item: ToDoItem) {
+            toDoItem = item
         }
     }
 }
+
+
+
+
+
+
+
 
 
 
