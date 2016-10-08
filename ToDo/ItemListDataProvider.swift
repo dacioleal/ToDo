@@ -47,14 +47,44 @@ class ItemListDataProvider: NSObject, UITableViewDataSource, UITableViewDelegate
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ItemCell
         
-        if let toDoItem = itemManager?.itemAtIndex(indexPath.row) {
-            cell.configCell(WithItem: toDoItem)
+        guard let itemManager = itemManager
+            else {
+                fatalError()
+            }
+        
+        guard let section = Section(rawValue: indexPath.section)
+            else {
+                fatalError()
         }
         
+        let item: ToDoItem
+        
+        switch section {
+            
+        case .ToDo:
+                item = itemManager.itemAtIndex(indexPath.row)
+            
+        case .Done:
+                item = itemManager.doneItemAtIndex(indexPath.row)
+        }
+        
+        cell.configCell(WithItem: item)
+
         return cell
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

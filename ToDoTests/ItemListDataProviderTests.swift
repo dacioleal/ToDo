@@ -16,6 +16,7 @@ class ItemListDataProviderTests: XCTestCase {
     var tableView: UITableView!
     
     override func setUp() {
+        
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
         sut = ItemListDataProvider()
@@ -34,11 +35,13 @@ class ItemListDataProviderTests: XCTestCase {
     }
     
     func testNumberOfSectionsIsTwo() {
+        
         let numberOfSections = tableView.numberOfSections
         XCTAssertEqual(numberOfSections, 2)
     }
     
     func testNumberOfRowsInFirstSection_IsToDoCount() {
+        
         sut.itemManager!.addItem(ToDoItem(title: "First"))
         XCTAssertEqual(tableView.numberOfRows(inSection: 0), 1)
         
@@ -47,7 +50,8 @@ class ItemListDataProviderTests: XCTestCase {
         XCTAssertEqual(tableView.numberOfRows(inSection: 0), 2)
     }
     
-    func testNumberIfRowsInsecondSection_IsDoneCount() {
+    func testNumberOfRowsInsecondSection_IsDoneCount() {
+        
         sut.itemManager!.addItem(ToDoItem(title: "First"))
         sut.itemManager!.addItem(ToDoItem(title: "Second"))
         sut.itemManager!.checkItemAtIndex(0)
@@ -58,6 +62,7 @@ class ItemListDataProviderTests: XCTestCase {
     }
     
     func testCellForRow_ReturnsItemCell() {
+        
         sut.itemManager?.addItem(ToDoItem(title: "First"))
         tableView.reloadData()
         
@@ -66,9 +71,9 @@ class ItemListDataProviderTests: XCTestCase {
     }
     
     func testCellForRow_DequeuesCell() {
-        let mockTableView = MockTableView()
-        mockTableView.dataSource = sut
-        mockTableView.register(ItemCell.classForKeyedArchiver(), forCellReuseIdentifier: "ItemCell")
+        
+        let mockTableView = MockTableView.mockTableViewWithDataSource(sut)
+        
         sut.itemManager?.addItem(ToDoItem(title: "First"))
         mockTableView.reloadData()
         _ = mockTableView.cellForRow(at: IndexPath(row: 0, section: 0))
@@ -76,15 +81,32 @@ class ItemListDataProviderTests: XCTestCase {
     }
     
     func testConfigCell_GetsCalledInCellForRow() {
-        let mockTableView = MockTableView()
-        mockTableView.dataSource = sut
-        mockTableView.register(MockItemCell.classForKeyedArchiver(), forCellReuseIdentifier: "ItemCell")
+        
+        let mockTableView = MockTableView.mockTableViewWithDataSource(sut)
+        
         let toDoItem = ToDoItem(title: "First")
         sut.itemManager?.addItem(toDoItem)
         mockTableView.reloadData()
         let cell = mockTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! MockItemCell
         XCTAssertEqual(cell.toDoItem, toDoItem)
         
+    }
+    
+    func testCellsInSectionTwo_GetsConfiguredWithDoneItems() {
+        
+        let mockTableView = MockTableView.mockTableViewWithDataSource(sut)
+        
+        let firstItem = ToDoItem(title: "First")
+        sut.itemManager?.addItem(firstItem)
+        
+        let secondItem = ToDoItem(title: "Second")
+        sut.itemManager?.addItem(secondItem)
+        
+        sut.itemManager?.checkItemAtIndex(1)
+        mockTableView.reloadData()
+        
+        let cell = mockTableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! MockItemCell
+        XCTAssertEqual(cell.toDoItem, secondItem)
     }
     
 }
@@ -98,6 +120,16 @@ extension ItemListDataProviderTests {
         override func dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> UITableViewCell {
             cellGotDequeued = true
             return super.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+        }
+        
+        class func mockTableViewWithDataSource(_ datasource: UITableViewDataSource) -> MockTableView {
+            
+            let rect = CGRect(x: 0, y: 0, width: 320, height: 480)
+            let mockTableView = MockTableView(frame: rect, style: .plain)
+            mockTableView.dataSource = datasource
+            mockTableView.register(MockItemCell.classForKeyedArchiver(), forCellReuseIdentifier: "ItemCell")
+            
+            return mockTableView
         }
     }
     
