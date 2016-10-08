@@ -21,15 +21,25 @@ class ItemCell: UITableViewCell {
         return dateFormatter
     }()
     
-    func configCell(WithItem item:ToDoItem) {
+    func configCell(WithItem item:ToDoItem, checked: Bool = false) {
         
-        titleLabel.text = item.title
-        locationLabel.text = item.location?.name
-        
-        if let timestamp = item.timestamp {
+        if checked {
             
-            let date = Date(timeIntervalSince1970: timestamp)
-            dateLabel.text = dateFormatter.string(from: date)
+            let attributedTitle = NSAttributedString(string: item.title, attributes: [NSStrikethroughStyleAttributeName:NSUnderlineStyle.styleSingle.rawValue])
+            titleLabel.attributedText = attributedTitle
+            locationLabel.text = nil
+            dateLabel.text = nil
+            
+        } else {
+    
+            titleLabel.text = item.title
+            locationLabel.text = item.location?.name
+            
+            if let timestamp = item.timestamp {
+                
+                let date = Date(timeIntervalSince1970: timestamp)
+                dateLabel.text = dateFormatter.string(from: date)
+            }
         }
         
     }
