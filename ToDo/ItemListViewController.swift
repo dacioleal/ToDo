@@ -12,6 +12,7 @@ class ItemListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet var dataProvider: (UITableViewDataSource & UITableViewDelegate)!
+    @IBOutlet weak var titleLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
