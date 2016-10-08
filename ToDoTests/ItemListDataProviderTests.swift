@@ -27,6 +27,7 @@ class ItemListDataProviderTests: XCTestCase {
         _ = controller.view
         tableView = controller.tableView
         tableView.dataSource = sut
+        tableView.delegate = sut
     }
     
     override func tearDown() {
@@ -107,6 +108,18 @@ class ItemListDataProviderTests: XCTestCase {
         
         let cell = mockTableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! MockItemCell
         XCTAssertEqual(cell.toDoItem, secondItem)
+    }
+    
+    func testDeletionButtonInFirstSection_ShowsTitleCheck() {
+
+        let deleteButtonTitle = tableView.delegate?.tableView?(tableView, titleForDeleteConfirmationButtonForRowAt: IndexPath(row: 0, section: 0))
+        XCTAssertEqual(deleteButtonTitle, "Check")
+    }
+    
+    func testDeletionButtonInSecondSection_ShowsTitleUncheck() {
+        
+        let deleteButtonTitle = tableView.delegate?.tableView?(tableView, titleForDeleteConfirmationButtonForRowAt: IndexPath(row: 0, section: 1))
+        XCTAssertEqual(deleteButtonTitle, "Uncheck")
     }
     
 }
