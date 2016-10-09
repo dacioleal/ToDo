@@ -68,9 +68,17 @@ class DetailViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.dateLabel.text, "02/22/2016")
         XCTAssertEqual(sut.locationLabel.text, "Home")
         XCTAssertEqualWithAccuracy(sut.mapView.centerCoordinate.latitude, coordinate.latitude, accuracy: 0.0001)
-        
     }
     
+    func testCheckItem_ChecksItemInItemManager() {
+        
+        let itemManager = ItemManager()
+        itemManager.addItem(ToDoItem(title: "The title"))
+        sut.itemInfo = (itemManager, 0)
+        sut.checkItem()
+        XCTAssertEqual(itemManager.toDoCount, 0)
+        XCTAssertEqual(itemManager.doneCount, 1)
+    }
 }
 
 
