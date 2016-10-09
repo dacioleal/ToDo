@@ -27,6 +27,7 @@ class ItemListDataProviderTests: XCTestCase {
         _ = controller.view
         tableView = controller.tableView
         tableView.dataSource = sut
+        tableView.delegate = sut
     }
     
     override func tearDown() {
@@ -109,6 +110,44 @@ class ItemListDataProviderTests: XCTestCase {
         XCTAssertEqual(cell.toDoItem, secondItem)
     }
     
+    func testDeletionButtonInFirstSection_ShowsTitleCheck() {
+
+        let deleteButtonTitle = tableView.delegate?.tableView?(tableView, titleForDeleteConfirmationButtonForRowAt: IndexPath(row: 0, section: 0))
+        XCTAssertEqual(deleteButtonTitle, "Check")
+    }
+    
+    func testDeletionButtonInSecondSection_ShowsTitleUncheck() {
+        
+        let deleteButtonTitle = tableView.delegate?.tableView?(tableView, titleForDeleteConfirmationButtonForRowAt: IndexPath(row: 0, section: 1))
+        XCTAssertEqual(deleteButtonTitle, "Uncheck")
+    }
+    
+    func testCheckingAnItem_ChecksItInTheItemManager() {
+
+        sut.itemManager?.addItem(ToDoItem(title: "First"))
+        tableView.dataSource?.tableView?(tableView, commit: UITableViewCellEditingStyle.delete, forRowAt: IndexPath(row: 0, section: 0))
+        
+        XCTAssertEqual(sut.itemManager?.toDoCount, 0)
+        XCTAssertEqual(sut.itemManager?.doneCount, 1)
+        XCTAssertEqual(tableView.numberOfRows(inSection: 0), 0)
+        XCTAssertEqual(tableView.numberOfRows(inSection: 1), 1)
+    }
+    
+    func testUncheckingAnItem_UnchecksItInTheItemManager() {
+        
+        sut.itemManager?.addItem(ToDoItem(title: "First"))
+        sut.itemManager?.checkItemAtIndex(0)
+        tableView.reloadData()
+        
+        tableView.dataSource?.tableView?(tableView, commit: UITableViewCellEditingStyle.delete, forRowAt: IndexPath(row: 0, section: 1))
+        
+        XCTAssertEqual(sut.itemManager?.toDoCount, 1)
+        XCTAssertEqual(sut.itemManager?.doneCount, 0)
+        XCTAssertEqual(tableView.numberOfRows(inSection: 0), 1)
+        XCTAssertEqual(tableView.numberOfRows(inSection: 1), 0)
+
+    }
+    
 }
 
 extension ItemListDataProviderTests {
@@ -137,7 +176,7 @@ extension ItemListDataProviderTests {
         
         var toDoItem: ToDoItem?
         
-        override func configCell(WithItem item: ToDoItem) {
+        override func configCell(WithItem item: ToDoItem, checked: Bool = false) {
             toDoItem = item
         }
     }

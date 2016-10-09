@@ -72,6 +72,48 @@ class ItemListDataProvider: NSObject, UITableViewDataSource, UITableViewDelegate
 
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        
+        
+        guard let section = Section(rawValue: indexPath.section) else {
+            
+            fatalError()
+        }
+        
+        let buttonTitle: String
+        
+        switch section {
+        case .ToDo:
+            buttonTitle = "Check"
+        case .Done:
+            buttonTitle = "Uncheck"
+        }
+        
+        return buttonTitle
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        guard let itemManager = itemManager
+            else {
+                fatalError()
+        }
+        
+        guard let section = Section(rawValue: indexPath.section) else {
+            
+            fatalError()
+        }
+        
+        switch section {
+        case .ToDo:
+            itemManager.checkItemAtIndex(indexPath.row)
+        case .Done:
+            itemManager.uncheckItemAtIndex(indexPath.row)
+        }
+        
+        tableView.reloadData()
+    }
 
 }
 
