@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class InputViewController: UIViewController {
 
@@ -16,10 +17,16 @@ class InputViewController: UIViewController {
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var descriptionTextField: UITextField!
     
+    lazy var geocoder = CLGeocoder()
+    var itemManager: ItemManager?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
+    
+    func save() {
+        
+    }
+    
 
 }

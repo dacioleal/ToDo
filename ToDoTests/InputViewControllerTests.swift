@@ -7,11 +7,14 @@
 //
 
 import XCTest
+import CoreLocation
 @testable import ToDo
 
 class InputViewControllerTests: XCTestCase {
     
     var sut: InputViewController!
+    var placeMark: MockPlaceMark!
+    
     
     override func setUp() {
         super.setUp()
@@ -32,5 +35,118 @@ class InputViewControllerTests: XCTestCase {
         XCTAssertNotNil(sut.titleTextField)
     }
     
+    func test_HasDateTextField() {
+        
+        XCTAssertNotNil(sut.dateTextField)
+    }
+    
+    func test_HasLocationTextField() {
+        
+        XCTAssertNotNil(sut.locationTextField)
+    }
+    
+    func test_HasAddressTextField() {
+        
+        XCTAssertNotNil(sut.addressTextField)
+    }
+    
+    func test_HasDescriptionTextField() {
+        
+        XCTAssertNotNil(sut.descriptionTextField)
+    }
+    
+    func testSave_UsesGeocoderToGetCoordinateFromAddress() {
+        
+        sut.titleTextField.text = "Test Title"
+        sut.dateTextField.text = "02/22/2016"
+        sut.locationTextField.text = "Office"
+        sut.addressTextField.text = "Infinite Loop 1, Cupertino"
+        sut.descriptionTextField.text = "Test Description"
+        
+        let mockGeocoder = MockGeoCoder()
+        sut.geocoder = mockGeocoder
+        
+        sut.itemManager = ItemManager()
+        
+        sut.save()
+        
+        placeMark = MockPlaceMark()
+        let coordinate = CLLocationCoordinate2D(latitude: 37.3316851, longitude: -122.0300674)
+        placeMark.mockCoordinate = coordinate
+        mockGeocoder.completionHandler?([placeMark], nil)
+        
+        let item = sut.itemManager?.itemAtIndex(0)
+        
+        let testItem = ToDoItem(title: "Test Title", itemDescription: "Test Description", timestamp: 1456095600, location: Location(name: "Office", coordinate: coordinate))
+        
+        XCTAssertEqual(item, testItem)
+    }
+    
     
 }
+
+extension InputViewControllerTests {
+    
+    class MockGeoCoder: CLGeocoder {
+        
+        var completionHandler: CLGeocodeCompletionHandler?
+        
+        override func geocodeAddressString(_ addressString: String, completionHandler: @escaping CLGeocodeCompletionHandler) {
+            
+            self.completionHandler = completionHandler
+        }
+    }
+    
+    class MockPlaceMark: CLPlacemark {
+        
+        var mockCoordinate: CLLocationCoordinate2D?
+        
+        override var location: CLLocation? {
+            
+            guard let coordinate = mockCoordinate else {
+                return CLLocation()
+            }
+            
+            return CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        }
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
