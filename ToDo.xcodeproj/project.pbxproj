@@ -117,6 +117,18 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		F31E0A9E1DB7E457002FCA68 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F30EDBC41D97B62B006C6153 /* ItemListViewController.swift */,
+				F3957F0C1DA96743008B8F95 /* DetailViewController.swift */,
+				F3FAA56B1DAA1B0E005C988D /* InputViewController.swift */,
+				F38158C51D982CFA00598CD9 /* ItemListDataProvider.swift */,
+				F3355E0D1D9FAA630071227F /* ItemCell.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		F384DB5D1D968168008E5ECF = {
 			isa = PBXGroup;
 			children = (
@@ -145,13 +157,9 @@
 				F384DB721D968168008E5ECF /* LaunchScreen.storyboard */,
 				F384DB701D968168008E5ECF /* Assets.xcassets */,
 				F384DB751D968168008E5ECF /* Info.plist */,
-				F384DB9E1D968470008E5ECF /* Model */,
 				F384DB691D968168008E5ECF /* AppDelegate.swift */,
-				F30EDBC41D97B62B006C6153 /* ItemListViewController.swift */,
-				F3957F0C1DA96743008B8F95 /* DetailViewController.swift */,
-				F3FAA56B1DAA1B0E005C988D /* InputViewController.swift */,
-				F38158C51D982CFA00598CD9 /* ItemListDataProvider.swift */,
-				F3355E0D1D9FAA630071227F /* ItemCell.swift */,
+				F384DB9E1D968470008E5ECF /* Model */,
+				F31E0A9E1DB7E457002FCA68 /* Controller */,
 			);
 			path = ToDo;
 			sourceTree = "<group>";
