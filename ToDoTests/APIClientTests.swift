@@ -60,14 +60,33 @@ class APIClientTests: XCTestCase {
     }
     
     
-    
+    func testLogin_SetsToken() {
+        
+        let mockKeyChainManager = MockKeyChainManager()
+        sut.keyChainManager = mockKeyChainManager
+        
+        let completion = { (error: Error?) in }
+        sut.loginUser(name: "dasdom", password: "1234", completion: completion)
+        
+        let responseDict = ["token" : "1234567890"]
+        do {
+            let responseData = try JSONSerialization.data(withJSONObject: responseDict, options: .prettyPrinted)
+            mockURLSession.completionHandler?(responseData, nil, nil)
+            let token = mockKeyChainManager.passwordForAccount(account: "token")
+            XCTAssertEqual(token, responseDict["token"])
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 }
+
+
 
 extension APIClientTests {
 
     class MockURLSession: ToDoURLSession {
         
-        typealias Handler = (Data, URLResponse, Error) -> Void
+        typealias Handler = (Data?, URLResponse?, Error?) -> Void
         var completionHandler: Handler?
         var url: URL?
         var dataTask = MockURLSessionDataTask()
@@ -87,7 +106,26 @@ extension APIClientTests {
             resumeGotCalled = true
         }
     }
+
+    class MockKeyChainManager: KeyChainAccesible {
+        
+        var passwordDict = [String : String]()
+        
+        func setPassword(password: String, account: String) {
+            passwordDict[account] = password
+        }
+        
+        func deletePasswordForAccount(account: String) {
+            passwordDict.removeValue(forKey: account)
+        }
+        
+        func passwordForAccount(account: String) -> String? {
+            return passwordDict[account]
+        }
+
+    }
 }
+
 
 
 

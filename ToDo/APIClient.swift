@@ -11,6 +11,7 @@ import Foundation
 class APIClient {
     
     lazy var session: ToDoURLSession = URLSession.shared as! ToDoURLSession
+    var keyChainManager: KeyChainAccesible?
     
     func loginUser(name: String, password: String, completion: (Error?) -> Void) {
         
@@ -29,7 +30,13 @@ class APIClient {
         }
         
         let task = session.dataTaskWithURL(url: url) { (data, response, error) in
-            
+            do {
+                let responseDict = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String : Any]
+                let token = responseDict["token"] as! String
+                self.keyChainManager?.setPassword(password: token, account: "token")
+            } catch {
+                print(error.localizedDescription)
+            }
         }
         task.resume()
         

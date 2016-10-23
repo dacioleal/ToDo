@@ -21,6 +21,7 @@
 		F384DB741D968168008E5ECF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F384DB721D968168008E5ECF /* LaunchScreen.storyboard */; };
 		F384DB7F1D968168008E5ECF /* ToDoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F384DB7E1D968168008E5ECF /* ToDoTests.swift */; };
 		F384DB8A1D968168008E5ECF /* ToDoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F384DB891D968168008E5ECF /* ToDoUITests.swift */; };
+		F39215FD1DBD11AD00A86B1E /* KeyChainAccessible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39215FC1DBD11AD00A86B1E /* KeyChainAccessible.swift */; };
 		F3957F0B1DA9660A008B8F95 /* DetailViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3957F0A1DA9660A008B8F95 /* DetailViewControllerTests.swift */; };
 		F3957F0D1DA96743008B8F95 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3957F0C1DA96743008B8F95 /* DetailViewController.swift */; };
 		F3957F101DA96DC2008B8F95 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3957F0F1DA96DC2008B8F95 /* MapKit.framework */; };
@@ -72,6 +73,7 @@
 		F384DB851D968168008E5ECF /* ToDoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F384DB891D968168008E5ECF /* ToDoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoUITests.swift; sourceTree = "<group>"; };
 		F384DB8B1D968168008E5ECF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F39215FC1DBD11AD00A86B1E /* KeyChainAccessible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainAccessible.swift; sourceTree = "<group>"; };
 		F3957F0A1DA9660A008B8F95 /* DetailViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewControllerTests.swift; sourceTree = "<group>"; };
 		F3957F0C1DA96743008B8F95 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		F3957F0F1DA96DC2008B8F95 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -165,6 +167,7 @@
 				F384DB9E1D968470008E5ECF /* Model */,
 				F31E0A9E1DB7E457002FCA68 /* Controller */,
 				F39973371DBB9F0600C06C6D /* APIClient.swift */,
+				F39215FC1DBD11AD00A86B1E /* KeyChainAccessible.swift */,
 			);
 			path = ToDo;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 				F37C4E271D96E3FE0080572C /* ItemManager.swift in Sources */,
 				F38158C61D982CFA00598CD9 /* ItemListDataProvider.swift in Sources */,
 				F39973381DBB9F0600C06C6D /* APIClient.swift in Sources */,
+				F39215FD1DBD11AD00A86B1E /* KeyChainAccessible.swift in Sources */,
 				F384DB6A1D968168008E5ECF /* AppDelegate.swift in Sources */,
 				F3D0D5551D969C7700BDE714 /* Location.swift in Sources */,
 				F3355E0E1D9FAA630071227F /* ItemCell.swift in Sources */,
