@@ -28,9 +28,10 @@ class APIClient {
             fatalError()
         }
         
-        session.dataTaskWithURL(url: url) { (data, response, error) in
+        let task = session.dataTaskWithURL(url: url) { (data, response, error) in
             
         }
+        task.resume()
         
     }
 }

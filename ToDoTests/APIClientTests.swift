@@ -11,21 +11,21 @@ import XCTest
 
 class APIClientTests: XCTestCase {
     
+    var sut: APIClient!
+    var mockURLSession: MockURLSession!
+    
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        sut = APIClient()
+        mockURLSession = MockURLSession()
+        sut.session = mockURLSession
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
     
     func testLogin_MakeRequestWithUserNameAndPassword() {
-        
-        let sut = APIClient()
-        let mockURLSession = MockURLSession()
-        sut.session = mockURLSession
         
         let completion = { (error: Error?) in }
         sut.loginUser(name: "dasdöm", password: "%&34", completion: completion)
@@ -40,7 +40,6 @@ class APIClientTests: XCTestCase {
         XCTAssertEqual(urlComponents?.host, "awesometodos.com")
         XCTAssertEqual(urlComponents?.path, "/login")
         
-        
         let allowedCharacters = NSCharacterSet(charactersIn: "/%&=?$#+-~@<>|\\*,.()[]{}!").inverted
         guard let expectedUserName = "dasdöm".addingPercentEncoding(withAllowedCharacters: allowedCharacters) else {
             fatalError()
@@ -49,9 +48,18 @@ class APIClientTests: XCTestCase {
         guard let expectedPassword = "%&34".addingPercentEncoding(withAllowedCharacters: allowedCharacters) else {
             fatalError()
         }
-        
         XCTAssertEqual(urlComponents?.percentEncodedQuery, "username=\(expectedUserName)&password=\(expectedPassword)")
     }
+    
+    
+    func testLogin_CallsResumeOnDataTask() {
+        
+        let completion = { (error: Error?) in }
+        sut.loginUser(name: "dasdom", password: "1234", completion: completion)
+        XCTAssertTrue(mockURLSession.dataTask.resumeGotCalled)
+    }
+    
+    
     
 }
 
@@ -60,17 +68,36 @@ extension APIClientTests {
     class MockURLSession: ToDoURLSession {
         
         typealias Handler = (Data, URLResponse, Error) -> Void
-        
         var completionHandler: Handler?
         var url: URL?
+        var dataTask = MockURLSessionDataTask()
         
         func dataTaskWithURL(url: URL, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
-            
             self.url = url
             self.completionHandler = completionHandler
-            return URLSession.shared.dataTask(with: url)
-            
+            return dataTask
         }
-
+    }
+    
+    class MockURLSessionDataTask: URLSessionDataTask {
+        
+        var resumeGotCalled = false
+        
+        override func resume() {
+            resumeGotCalled = true
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
